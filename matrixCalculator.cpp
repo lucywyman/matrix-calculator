@@ -12,6 +12,8 @@ void createMatrix(int N);
 
 void resultMatrix(int **matrix, int N);
 
+void recursiveResultMatrix(int **matrix, int N, int i, int j);
+
 int sumSquare(int a, int b, int c, int d);
 
 int main(){
@@ -19,16 +21,14 @@ int main(){
     while (1){
 	while (play == "Yes" || play == "yes" || play == "y" || play == "Y"){
 	    int N = getN();
-	    if (N == 0){
+	    if (N == 0)
 		break;
-	    }
 	    createMatrix(N);
 	    cout<<"Would you like to generate another matrix?  "<<endl;
 	    cin>>play;
 	}
-	if (play!= "Yes" && play!="yes" && play!="y" && play!="Y" && play!="continue"){
+	if (play!= "Yes" && play!="yes" && play!="y" && play!="Y" && play!="continue")
 	    break;
-	}
     }
     return 0;
 }
@@ -50,9 +50,8 @@ int getN(){
 void createMatrix(int N){
     int **matrix;
     matrix = new int*[N];
-    for(int h=0; h<N;h++){
+    for(int h=0; h<N;h++)
 	matrix[h] = new int[N];
-    }
     int k = 0;
     for (int i = 0; i<N; i++){
 	for(int j = 0; j<N; j++){
@@ -65,6 +64,8 @@ void createMatrix(int N){
     cout<<"--------------------------------------"<<endl;
     cout<<"Resultant Matrix:"<<endl;
     resultMatrix(matrix, N);
+    cout<<"Recursive Resultant Matrix:"<<endl;
+    recursiveResultMatrix(matrix, N, 0, 0);
 }
 
 void resultMatrix(int **matrix, int N){
@@ -76,6 +77,22 @@ void resultMatrix(int **matrix, int N){
 	}
 	cout<<endl;
     }
+    cout<<"-------------------------------------------"<<endl;
+}
+
+void recursiveResultMatrix(int **matrix, int N, int i, int j){
+    int resultMatrix[N-1][N-1];
+    while (j==N-1){
+	cout<<endl;
+	i+= 1;
+	if (i==N-1)
+	    return;
+	j = 0;
+    }
+    resultMatrix[i][j] = sumSquare(matrix[i][j], matrix[i+1][j], matrix[i][j+1], matrix[i+1][j+1]);
+    cout<<resultMatrix[i][j]<<" ";
+    j+= 1;
+    recursiveResultMatrix(matrix, N, i, j);
 }
 
 int sumSquare(int a, int b, int c, int d){

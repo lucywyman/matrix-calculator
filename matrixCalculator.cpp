@@ -80,7 +80,7 @@ int getN(){
     int N;
     cout<<"Please enter a number to construct the NxN matrix:  ";
     cin>>N;
-    if (cin.fail() || N>100 || N<0){
+    if (cin.fail() || N>40 || N<0){
 	cin.clear();
 	cin.ignore(1000, '\n');
 	cout<<"\033[1;31mSorry! You did not input a positive integer less than 100.  Please try again!\033[0m\n"<<endl;
